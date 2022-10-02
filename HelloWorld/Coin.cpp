@@ -12,7 +12,7 @@ Coin::Coin(Vector2f platformPiecePos)
 	spriteId = PlayGraphics::Instance().GetSpriteId("Coin");
 	frame = 0;
 
-	/*
+	/* Old object pooling code
 	Vector2f coinPos = { platformPiecePos.x, platformPiecePos.y - playerRunHeight - 25 };
 
 	std::vector<int> vCoins = Play::CollectGameObjectIDsByType(TYPE_COIN);
@@ -54,7 +54,8 @@ bool Coin::IsCollidingWithPlayer()
 	int yDiff = int(pos.y) - int(obj_player.pos.y);
 	int radii = obj_player.radius + collisionRadius;
 
-	// Game progammers don't do square root!
+	//Game progammers don't do square root!
+	//It uses a lot of processing power and in this case can be easily avoided
 	return((xDiff * xDiff) + (yDiff * yDiff) < radii * radii);
 }
 

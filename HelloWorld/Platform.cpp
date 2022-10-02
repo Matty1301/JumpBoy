@@ -9,7 +9,6 @@
 void UpdatePlatforms()
 {
 	//For each platform level check if a new platform should be spawned
-	int platformLength;
 	for (int platformLevel = 1; platformLevel <= gameState.timeToSpawnPlatforms.size(); platformLevel++)
 	{
 		float& timeToSpawnPlatform = gameState.timeToSpawnPlatforms[platformLevel - 1];
@@ -17,9 +16,9 @@ void UpdatePlatforms()
 
 		if (gameState.playerState != STATE_DEAD && timeToSpawnPlatform <= 0)
 		{
-			platformLength = SpawnPlatform(platformLevel);
+			int spawnedPlatformLength = SpawnPlatform(platformLevel);
 			//Update time to spawn outisde of SpawnPlatform function for better visibility
-			timeToSpawnPlatform = platformLength * 0.2f + Play::RandomRoll(8) * 0.2f;
+			timeToSpawnPlatform = spawnedPlatformLength * 0.2f + Play::RandomRoll(8) * 0.2f;
 		}
 	}
 

@@ -12,7 +12,7 @@ void UpdatePlayer()
 
 	int tileHeight = Play::GetSpriteHeight(gameState.ptr_activeTile->spriteId);
 
-	//This is the position of the top of the active tile after it is updated
+	//This is the position of the top of the active tile after it gets updated
 	int tileTopNewPosY = gameState.ptr_activeTile->pos.y - tileHeight / 2 + gameState.currentVelocity.y;
 
 	switch (gameState.playerState)
@@ -34,9 +34,8 @@ void UpdatePlayer()
 		HandlePlayerControls();
 
 		//If the player was above the active tile last frame but is on or below it this frame start running
-		//active tile 'old' pos isn't needed here because it hasn't been updated for the current frame yet
 		if (tileTopNewPosY <= obj_player.pos.y + playerRunHeight
-			&& gameState.ptr_activeTile->oldPos.y - tileHeight / 2 > obj_player.oldPos.y + playerRunHeight)
+			&& gameState.ptr_activeTile->pos.y - tileHeight / 2 > obj_player.oldPos.y + playerRunHeight)
 		{
 			gameState.playerState = STATE_RUN;
 
@@ -87,7 +86,7 @@ void HandlePlayerControls()
 {
 	GameObject& obj_player = Play::GetGameObjectByType(TYPE_PLAYER);
 
-	//Holding down the spacebar let's you jump higher
+	//Holding down the spacebar lets you jump higher
 	if (gameState.playerState == STATE_AIRBORNE)
 	{
 		if (Play::KeyDown(VK_SPACE) && gameState.relativeVelocity.y > 0)
